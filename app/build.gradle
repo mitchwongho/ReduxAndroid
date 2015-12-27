@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+buildscript {
+    ext.android_support_lib_version = '23.1.1'
+    ext.retrolambda_version = '3.2.4'
+    ext.rxbinding_version = '0.3.0'
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "me.tatarka:gradle-retrolambda:$retrolambda_version"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "za.co.mitchwongho.reduxandroid.example"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:$android_support_lib_version"
+    compile project(":redux")
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile "com.jakewharton.rxbinding:rxbinding:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-support-v4:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-appcompat-v7:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-design:$rxbinding_version"
+    compile "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:$rxbinding_version"
+}
+
+retrolambda {
+    javaVersion JavaVersion.VERSION_1_7
+}

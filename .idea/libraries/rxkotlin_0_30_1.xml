@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="rxkotlin-0.30.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex/rxkotlin/0.30.1/7b9b20488ef993112d021f3c3913a64d5ac75967/rxkotlin-0.30.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.reactivex/rxkotlin/0.30.1/3207fa311bdb6e7c28522137fef1c7a5ae21f507/rxkotlin-0.30.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
