@@ -6,15 +6,15 @@ package za.co.mitchwongho.reduxandroid.example.app;
  */
 public class MainActivityState implements ReduxState {
     private CharSequence text;
-    private boolean editable;
+    private boolean clickable;
 
-    public MainActivityState(CharSequence text, boolean editable) {
+    public MainActivityState(CharSequence text, boolean clickable) {
         this.text = text;
-        this.editable = editable;
+        this.clickable = clickable;
     }
 
-    public boolean isEditable() {
-        return editable;
+    public boolean isClickable() {
+        return clickable;
     }
 
     public CharSequence getText() {

@@ -2,39 +2,47 @@ package za.co.mitchwongho.reduxandroid.example.app;
 
 import org.jetbrains.annotations.NotNull;
 
+import kotlin.jvm.functions.Function2;
 import rx.Observable;
+import rx.Subscription;
 import rx.subjects.PublishSubject;
 import za.co.mitchwongho.reduxandroid.example.app.action.ReduxAction;
-import za.co.mitchwongho.reduxandroid.ext.*;
+import za.co.mitchwongho.reduxandroid.ext.Store;
 
 /**
  *
  */
 public class ReduxStore extends Store<ReduxState, ReduxAction> {
 
+    PublishSubject<ReduxState> obz = PublishSubject.create();
 
-    PublishSubject<ReduxState> sub = PublishSubject.create();
-
-    ReduxState state = new MainActivityState("", true);
-
-    public ReduxStore(@NotNull final Reducer<ReduxState, ReduxAction> reducer) {
-        super(reducer);
+    public ReduxStore(@NotNull ReduxState initialState, @NotNull Function2<ReduxState, ReduxAction, ReduxState>[] reducers) {
+        super(initialState, reducers);
     }
 
     @Override
-    public void dispatch(@NotNull final ReduxAction action) {
-        this.state = super.getReducer().reduce(state, action);
-        sub.onNext(this.state);
+    public Subscription subscribe(@NotNull Observable<ReduxAction> observable) {
+        return observable.subscribe(reduxAction -> {
+            //onNext
+            dispatch(reduxAction);
+        });
     }
 
-    @Override
-    public ReduxState getState() {
-        return state;
+    private void dispatch(@NotNull final ReduxAction action) {
+        final ReduxState oldState = getState();
+        final ReduxState newState = super.reduce(oldState, action);
+        super.setState(newState);
+        obz.onNext(newState);
     }
 
     @NotNull
     @Override
     public Observable<ReduxState> observe() {
-        return sub;
+        return obz;
+    }
+
+    @Override
+    public void close() {
+        obz.onCompleted();
     }
 }
