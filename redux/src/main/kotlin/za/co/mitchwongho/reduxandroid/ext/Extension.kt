@@ -24,6 +24,8 @@ public abstract class Store<S, A>(public var state: S, public val reducers: Arra
 /**
  * Example of defining Reducer's in Kotlin
  */
+
+
 //val nameReducer = { user: User, action: Action ->
 //    when (action) {
 //        is FirstNameUpdatedAction -> User(action.name, user.lastname, user.age)
