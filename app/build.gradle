@@ -1,26 +1,26 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'za.co.mitchwongho.appversion'
+apply plugin: 'com.github.mitchwongho.appversion'
 
 buildscript {
     ext.android_support_lib_version = '23.1.1'
     ext.retrolambda_version = '3.2.4'
     ext.rxbinding_version = '0.3.0'
+    ext.appversion_version = '0.1.0'
     repositories {
         jcenter()
         mavenCentral()
-        mavenLocal()
     }
     dependencies {
         classpath "me.tatarka:gradle-retrolambda:$retrolambda_version"
-        classpath 'za.co.mitchwongho.gradle:appversion-plugin:1.0.0-SNAPSHOT'
+        classpath "com.github.mitchwongho.gradle:appversion-plugin:$appversion_version"
 
     }
 }
 
 repositories {
     mavenCentral()
-    mavenLocal()
+
 }
 
 android {
@@ -36,8 +36,8 @@ android {
         "echo ".execute().text
 //        printf("VERSION CODE: "+getVersionCode()+ "\n")
 //        printf("VERSION NAME: "+getVersionName()+"\n")
-//        versionCode getVersionCode()
-//        versionName getVersionName()
+//        versionCode 1
+//        versionName '1.0.0'
     }
     buildTypes {
         release {
@@ -68,44 +68,3 @@ dependencies {
 retrolambda {
     javaVersion JavaVersion.VERSION_1_7
 }
-
-//configurations {
-//    compile.exclude module: 'support-annotations'
-//}
-
-//class AndroidVersionPlugin implements Plugin<Project> {
-//    @Override
-//    void apply(final Project target) {
-//        target.extensions.create("appversion", AppVersionPluginExtension)
-//    }
-//}
-//
-//class AppVersionPluginExtension {
-//    def getVersionCode = {
-//        try {
-//            def stdout = new ByteArrayOutputStream()
-//            exec {
-//                commandLine 'git', 'rev-list', '--first-parent', '--count', 'origin/master'
-//                standardOutput = stdout
-//            }
-//            return Integer.parseInt(stdout.toString().trim())
-//        }
-//        catch (ignored) {
-//            return -1;
-//        }
-//    }
-//
-//    def getVersionName = {
-//        try {
-//            def stdout = new ByteArrayOutputStream()
-//            exec {
-//                commandLine 'git', 'describe', '--tags'
-//                standardOutput = stdout
-//            }
-//            return stdout.toString().trim()
-//        }
-//        catch (ignored) {
-//            return null;
-//        }
-//    }
-//}

@@ -1,7 +1,5 @@
 package za.co.mitchwongho.reduxandroid.example.app.action;
 
-import za.co.mitchwongho.reduxandroid.example.app.action.ReduxAction;
-
 /**
  *
  */
